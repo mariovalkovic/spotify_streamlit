@@ -9,7 +9,7 @@ import plotly.graph_objects as go
 st.set_page_config(page_title='Spotify Data Exploration', layout='wide')
 
 st.title('Spotify Data Exploration')
-st.success('Not satisfied with your Spotify wrapped stats? Just drop your JSON files of Extended streaming history that everyone can request at https://www.spotify.com/us/account/privacy/ (usually takes about 20 days)')
+st.success("Get a deeper dive into your Spotify listening habits with our data exploration app! Simply request and upload your Extended streaming history JSON files from Spotify's privacy page and see your music consumption like never before. Enhance your Spotify experience and learn more about your personal music preferences.  \n Try it out now! https://www.spotify.com/us/account/privacy/")
 
 st.sidebar.header('Upload JSON Data')
 uploaded_files = st.sidebar.file_uploader("", accept_multiple_files=True)
@@ -32,7 +32,7 @@ if st.sidebar.button('Analyze Data!'):
 
     fig = px.scatter(stats.head(10), x='tracks', y='hrs_played', text='artist_name')
     fig.update_traces(textposition='middle center', mode='text', textfont_size=15, textfont_color='rgb(0, 150, 255)')
-    fig.update_layout(xaxis=dict(range=[680, 3600]), height=600, title_x=0.5, title_text='Top 10 Artists - Based on number of songs and total hours played', xaxis_title='Number of songs', yaxis_title='Total hours played')
+    fig.update_layout(xaxis=dict(range=[680, 3600]), height=600, title_x=0.5, title_text='Top 10 Artists - Based on number of tracks and total hours played', xaxis_title='Number of tracks', yaxis_title='Total hours played')
     st.plotly_chart(fig)
 
     df2020 = df[(df['ts'] > '2020-01-01T00:00:00Z') & (df['ts'] < '2021-01-01T00:00:00Z')].sort_values('ts', ascending=True)
@@ -88,7 +88,7 @@ if st.sidebar.button('Analyze Data!'):
         title_x=0.5,
         title_text='All Time - Number of tracks monthly',
         xaxis_title=None,
-        yaxis_title='Tracks',
+        yaxis_title='Number of Tracks',
         bargap=0.5,)
     st.plotly_chart(fig)
 
@@ -104,7 +104,7 @@ if st.sidebar.button('Analyze Data!'):
                 + str(i+1)
                 + ' Artist - '
                 + stats_3years.loc[list(stats_3years.index)[i],'artist_name']
-                + ' (discovered '
+                + ' (first listened on '
                 + str(pd.to_datetime(Band['ts'].min()).date())
                 + ')',
                 xaxis_title=None,
@@ -130,7 +130,7 @@ if st.sidebar.button('Load example data'):
 
     fig = px.scatter(stats.head(10), x='tracks', y='hrs_played', text='artist_name')
     fig.update_traces(textposition='middle center', mode='text', textfont_size=15, textfont_color='rgb(0, 150, 255)')
-    fig.update_layout(xaxis=dict(range=[680, 3600]), height=600, title_x=0.5, title_text='Top 10 Artists - Based on number of songs and total hours played', xaxis_title='Number of songs', yaxis_title='Total hours played')
+    fig.update_layout(xaxis=dict(range=[680, 3600]), height=600, title_x=0.5, title_text='Top 10 Artists - Based on number of tracks and total hours played', xaxis_title='Number of tracks', yaxis_title='Total hours played')
     st.plotly_chart(fig)
 
     df2020 = df[(df['ts'] > '2020-01-01T00:00:00Z') & (df['ts'] < '2021-01-01T00:00:00Z')].sort_values('ts', ascending=True)
@@ -186,7 +186,7 @@ if st.sidebar.button('Load example data'):
         title_x=0.5,
         title_text='All Time - Number of tracks monthly',
         xaxis_title=None,
-        yaxis_title='Tracks',
+        yaxis_title='Number of Tracks',
         bargap=0.5,)
     st.plotly_chart(fig)
 
@@ -202,7 +202,7 @@ if st.sidebar.button('Load example data'):
                 + str(i+1)
                 + ' Artist - '
                 + stats_3years.loc[list(stats_3years.index)[i],'artist_name']
-                + ' (discovered '
+                + ' (first listened on '
                 + str(pd.to_datetime(Band['ts'].min()).date())
                 + ')',
                 xaxis_title=None,
